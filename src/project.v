@@ -38,7 +38,7 @@ module tt_um_omrawaley_pong (
   );
 
   // Tiny VGA PMOD: https://github.com/mole99/tiny-vga
-  assign uo_out = {r[1], g[1], b[1], vsync, r[0], g[0], b[0, hsync]};
+  assign uo_out = {r[1], g[1], b[1], vsync, r[0], g[0], b[0], hsync};
 
   // List all unused inputs to prevent warnings
   wire _unused = &{ena, clk, rst_n, 1'b0};
