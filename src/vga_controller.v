@@ -27,10 +27,10 @@ module vga_controller(
 
     localparam H_SYNC_START = H_RES + H_FRONT_PORCH;
     localparam H_SYNC_END = H_SYNC_START + H_SYNC_PULSE_WIDTH - 1;
-    localparam H_MAX = H_RES + H_FRONT_PORCH + H_SYNC_PULSE_WIDTH + H_BACK_PORCH - 1;
+    localparam H_MAX = H_SYNC_END + H_BACK_PORCH - 1;
     localparam V_SYNC_START = V_RES + V_FRONT_PORCH;
     localparam V_SYNC_END = V_SYNC_START + V_SYNC_PULSE_WIDTH - 1;
-    localparam V_MAX = V_RES + V_FRONT_PORCH + V_SYNC_PULSE_WIDTH + V_BACK_PORCH - 1;
+    localparam V_MAX = V_SYNC_END + V_BACK_PORCH - 1;
 
     wire h_reached_end = (h_count == H_MAX);
     wire v_reached_end = (v_count == V_MAX);
@@ -49,11 +49,12 @@ module vga_controller(
         end
 
         // Update vertical beam position.
-        if ((h_reached_end && v_reached_end) || ~rst_n) begin
-            v_count <= 0;
-        end else begin
-            v_count <= v_count + 1;
-        end
+        if (h_reached_end || ~rst_n) begin
+            if (v_reached_end || ~rst_n) begin
+                v_count <= 0;
+            end else begin
+                v_count <= v_count + 1;
+            end
     end
 
     // Enable the video only if the current frame should be visible.
