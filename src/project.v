@@ -24,6 +24,7 @@ module tt_um_omrawaley_pong (
   wire vsync;
   wire [9:0] h_count;
   wire [9:0] v_count;
+  wire video_en;
 
   vga_controller vga_cont(
     .clk(clk),
@@ -32,7 +33,13 @@ module tt_um_omrawaley_pong (
     .vsync(vsync),
     .h_count(h_count),
     .v_count(v_count),
+    .video_en(video_en),
   );
+
+  // Quick color test (temporary)
+  assign r = video_en ? 2'b11 : 2'b00;
+  assign g = video_en ? 2'b00 : 2'b00;
+  assign b = video_en ? 2'b01 : 2'b00;
 
   // Tiny VGA PMOD: https://github.com/mole99/tiny-vga
   assign uo_out = {r[1], g[1], b[1], vsync, r[0], g[0], b[0], hsync};
