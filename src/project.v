@@ -16,10 +16,6 @@ module tt_um_omrawaley_pong (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-  // All output pins must be assigned. If not used, assign to 0.
-  assign uio_out = 0;
-  assign uio_oe  = 0;
-
   wire [1:0] r;
   wire [1:0] g;
   wire [1:0] b;
@@ -39,6 +35,10 @@ module tt_um_omrawaley_pong (
 
   // Tiny VGA PMOD: https://github.com/mole99/tiny-vga
   assign uo_out = {r[1], g[1], b[1], vsync, r[0], g[0], b[0], hsync};
+
+  // All output pins must be assigned. If not used, assign to 0.
+  assign uio_out = 0;
+  assign uio_oe  = 0;
 
   // List all unused inputs to prevent warnings
   wire _unused = &{ena, clk, rst_n, 1'b0};

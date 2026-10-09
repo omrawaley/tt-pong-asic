@@ -31,8 +31,8 @@ module vga_controller(
     localparam V_SYNC_END = V_SYNC_START + V_SYNC_PULSE_WIDTH - 1;
     localparam V_MAX = V_RES + V_FRONT_PORCH + V_SYNC_PULSE_WIDTH + V_BACK_PORCH - 1;
 
-    reg h_reached_end = (hsync == H_SYNC_END) ? 1 : 0;
-    reg v_reached_end = (vsync == v_SYNC_END) ? 1 : 0;
+    reg h_reached_end = (hsync == H_MAX) ? 1 : 0;
+    reg v_reached_end = (vsync == V_MAX) ? 1 : 0;
 
     always @(posedge clk) begin
         // Update horizontal beam position.
@@ -56,6 +56,6 @@ module vga_controller(
     end
 
     // Enable the video only if the current frame should be visible.
-    assign video_end = (h_count < H_RES) && (v_count < V_RES);
+    assign video_en = (h_count < H_RES) && (v_count < V_RES);
 
 endmodule
