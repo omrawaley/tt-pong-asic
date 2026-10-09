@@ -32,8 +32,8 @@ module vga_controller(
     localparam V_SYNC_END = V_SYNC_START + V_SYNC_PULSE_WIDTH - 1;
     localparam V_MAX = V_RES + V_FRONT_PORCH + V_SYNC_PULSE_WIDTH + V_BACK_PORCH - 1;
 
-    reg h_reached_end = (hsync == H_MAX);
-    reg v_reached_end = (vsync == V_MAX);
+    wire h_reached_end = (h_count == H_MAX);
+    wire v_reached_end = (v_count == V_MAX);
 
     always @(posedge clk) begin
         // Update horizontal beam position.

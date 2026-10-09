@@ -42,7 +42,7 @@ module tt_um_omrawaley_pong (
   assign b = video_en ? 2'b01 : 2'b00;
 
   // Tiny VGA PMOD: https://github.com/mole99/tiny-vga
-  assign uo_out = {r[1], g[1], b[1], vsync, r[0], g[0], b[0], hsync};
+  assign uo_out = {hsync, b[0], g[0], r[0], vsync, b[1], g[1], r[1]};
 
   // All output pins must be assigned. If not used, assign to 0.
   assign uio_out = 0;
