@@ -55,6 +55,7 @@ module vga_controller(
             end else begin
                 v_count <= v_count + 1;
             end
+        end
     end
 
     // Enable the video only if the current frame should be visible.
