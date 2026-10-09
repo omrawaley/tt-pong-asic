@@ -36,6 +36,11 @@ module vga_controller(
     wire v_reached_end = (v_count == V_MAX);
 
     always @(posedge clk) begin
+        // Update HSYNC and VSYNC signals based on the current beam position.
+        // These signals are active-low, which is why they are inverted here.
+        hsync <= ~(h_count >= H_SYNC_START && h_count <= H_SYNC_END);
+        vsync <= ~(v_count >= V_SYNC_START && v_count <= V_SYNC_END);
+
         // Update horizontal beam position.
         if (h_reached_end || ~rst_n) begin
             h_count <= 0;
@@ -44,16 +49,11 @@ module vga_controller(
         end
 
         // Update vertical beam position.
-        if (v_reached_end || ~rst_n) begin
+        if ((h_reached_end && v_reached_end) || ~rst_n) begin
             v_count <= 0;
         end else begin
             v_count <= v_count + 1;
         end
-
-        // Update HSYNC and VSYNC signals based on the current beam position.
-        // These signals are active-low, which is why they are inverted here.
-        hsync <= ~(h_count >= H_SYNC_START && h_count <= H_SYNC_END);
-        vsync <= ~(v_count >= V_SYNC_START && v_count <= V_SYNC_END);
     end
 
     // Enable the video only if the current frame should be visible.
