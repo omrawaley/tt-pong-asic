@@ -49,6 +49,6 @@ module tt_um_omrawaley_pong (
   assign uio_oe  = 0;
 
   // List all unused inputs to prevent warnings
-  wire _unused = &{ena, clk, rst_n, 1'b0};
+  wire _unused = &{ena, clk, 1'b0};
 
 endmodule
