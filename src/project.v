@@ -27,6 +27,7 @@ module tt_um_omrawaley_pong (
 
   vga_controller vga_cont(
     .clk(clk),
+    .rst_n(rst_n),
     .hsync(hsync),
     .vsync(vsync),
     .h_count(h_count),
