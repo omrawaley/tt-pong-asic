@@ -1,11 +1,11 @@
-module vga_controller(
-    input wire clk,
-    input wire rst_n,
-    output reg hsync,
-    output reg vsync,
+module vga_controller (
+    input wire       clk,
+    input wire       rst_n,
+    output reg       hsync,
+    output reg       vsync,
     output reg [9:0] h_count,
     output reg [9:0] v_count,
-    output wire video_en,
+    output wire      video_en,
 );
 
     // See https://www.dmi.unict.it/santoro/teaching/sdl/slides/VGA_timing.pdf
