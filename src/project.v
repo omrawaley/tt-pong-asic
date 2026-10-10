@@ -52,7 +52,13 @@ module tt_um_omrawaley_pong (
     .y(player_y)
   );
 
-  // if (h_count <=)
+  always @(posedge clk) begin
+    if (h_count <= 16) begin
+      r <= video_en ? 2'b11 : 2'b00;
+      g <= video_en ? 2'b11 : 2'b00;
+      b <= video_en ? 2'b11 : 2'b00;
+    end
+  end
 
   // Tiny VGA PMOD: https://github.com/mole99/tiny-vga
   assign uo_out = {hsync, b[0], g[0], r[0], vsync, b[1], g[1], r[1]};
