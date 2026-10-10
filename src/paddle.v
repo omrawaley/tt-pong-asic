@@ -3,9 +3,9 @@ module paddle #(
     parameter HEIGHT = 80,
     // The paddles cannot move horizontally, so there is no point in storing 
     // the position in a 10-bit variable. Instead, just use a parameter.
-    parameter X;
-    parameter START_Y;
-    parameter SPEED = 2;
+    parameter X,
+    parameter START_Y,
+    parameter SPEED = 2
 )(
     input wire              clk,
     input wire signed [1:0] move_dir.

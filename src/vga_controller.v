@@ -5,7 +5,7 @@ module vga_controller (
     output reg       vsync,
     output reg [9:0] h_count,
     output reg [9:0] v_count,
-    output wire      video_en,
+    output wire      video_en
 );
 
     // See https://www.dmi.unict.it/santoro/teaching/sdl/slides/VGA_timing.pdf

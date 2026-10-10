@@ -33,7 +33,7 @@ module tt_um_omrawaley_pong (
     .vsync(vsync),
     .h_count(h_count),
     .v_count(v_count),
-    .video_en(video_en),
+    .video_en(video_en)
   );
 
   // Quick color test (temporary)
@@ -43,13 +43,13 @@ module tt_um_omrawaley_pong (
 
   wire [9:0] player_y;
 
-  paddle player #(
+  paddle #(
     .X(16),
-    .START_Y(0),
-  )(
+    .START_Y(0)
+  ) player (
     .clk(clk),
     .move_dir(ui_in[0] ? 1 : -1),
-    .y(player_y),
+    .y(player_y)
   );
 
   // if (h_count <=)
