@@ -10,13 +10,13 @@ module paddle #(
     input wire              clk,
     input wire signed [1:0] move_dir,
     output reg        [9:0] y,
-)
+);
 
     always @(posedge clk) begin
         if (move_dir > 0) begin
             y <= y - SPEED;
         end else if (move_dir < 0) begin
-            y < = y + SPEED;
+            y <= y + SPEED;
         end
     end
 
