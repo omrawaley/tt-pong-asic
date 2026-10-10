@@ -16,9 +16,9 @@ module tt_um_omrawaley_pong (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-  wire [1:0] r;
-  wire [1:0] g;
-  wire [1:0] b;
+  reg [1:0] r;
+  reg [1:0] g;
+  reg [1:0] b;
 
   wire hsync;
   wire vsync;
@@ -53,10 +53,16 @@ module tt_um_omrawaley_pong (
   );
 
   always @(posedge clk) begin
-    if (h_count <= 16) begin
-      r <= video_en ? 2'b11 : 2'b00;
-      g <= video_en ? 2'b11 : 2'b00;
-      b <= video_en ? 2'b11 : 2'b00;
+    if (video_en) begin
+      if (h_count <= 100) begin
+         r <= 2'b11;
+         g <= 2'b00;
+         b <= 2'b01;
+      end else begin
+        r <= 2'b00;
+         g <= 2'b00;
+         b <= 2'b01;
+      end
     end
   end
 
