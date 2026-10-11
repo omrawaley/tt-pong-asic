@@ -52,6 +52,7 @@ module tt_um_omrawaley_pong (
     .y(player_y)
   );
 
+  // Procedural drawing test (temporary)
   always @(posedge clk) begin
     if (video_en) begin
       if (h_count <= 100) begin
@@ -59,10 +60,14 @@ module tt_um_omrawaley_pong (
          g <= 2'b00;
          b <= 2'b01;
       end else begin
-        r <= 2'b00;
+         r <= 2'b00;
          g <= 2'b00;
          b <= 2'b01;
       end
+    end else begin
+      r <= 2'b00;
+      g <= 2'b00;
+      b <= 2'b00;
     end
   end
 
