@@ -1,14 +1,14 @@
 module vga_controller # (
-    parameter H_RES = 640;
-    parameter V_RES = 480;
+    parameter H_RES = 640,
+    parameter V_RES = 480,
 
-    parameter H_FRONT_PORCH = 16;
-    parameter H_BACK_PORCH = 48;
-    parameter V_FRONT_PORCH = 10;
-    parameter V_BACK_PORCH = 33;
+    parameter H_FRONT_PORCH = 16,
+    parameter H_BACK_PORCH = 48,
+    parameter V_FRONT_PORCH = 10,
+    parameter V_BACK_PORCH = 33,
 
-    parameter H_SYNC_PULSE_WIDTH = 96;
-    parameter V_SYNC_PULSE_WIDTH = 2;
+    parameter H_SYNC_PULSE_WIDTH = 96,
+    parameter V_SYNC_PULSE_WIDTH = 2
 )(
     input wire       clk,
     input wire       rst_n,
