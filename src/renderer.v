@@ -1,8 +1,8 @@
 module renderer #(
-    parameter VGA_H_RES,
-    parameter VGA_V_RES,
-    parameter PADDLE_WIDTH,
-    parameter PADDLE_HEIGHT
+    parameter VGA_H_RES = 640,
+    parameter VGA_V_RES = 480,
+    parameter PADDLE_WIDTH = 0,
+    parameter PADDLE_HEIGHT = 0
 )(
     input wire       clk,
     input wire       video_en,

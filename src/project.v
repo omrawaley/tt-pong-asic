@@ -46,6 +46,7 @@ module tt_um_omrawaley_pong (
   );
 
   wire [9:0] player_y;
+  wire [9:0] ai_y;
 
   paddle #(
     .WIDTH(PADDLE_WIDTH),
@@ -77,7 +78,9 @@ module tt_um_omrawaley_pong (
     .video_en(video_en),
     .r(r),
     .g(g),
-    .b(b)
+    .b(b),
+    .player_y(player_y),
+    .ai_y(ai_y)
   );
 
   // Procedural drawing test (temporary)

@@ -1,15 +1,15 @@
 module paddle #(
-    parameter WIDTH,
-    parameter HEIGHT,
+    parameter WIDTH = 0,
+    parameter HEIGHT = 0,
     // The paddles cannot move horizontally, so there is no point in storing 
     // the position in a 10-bit variable. Instead, just use a parameter.
-    parameter X,
-    parameter START_Y,
+    parameter X = 0,
+    parameter START_Y = 0,
     parameter SPEED = 2
 )(
     input wire              clk,
     input wire signed [1:0] move_dir,
-    output reg        [9:0] y,
+    output reg        [9:0] y
 );
 
     always @(posedge clk) begin
