@@ -1,6 +1,6 @@
 module paddle #(
-    parameter WIDTH = 16,
-    parameter HEIGHT = 80,
+    parameter WIDTH,
+    parameter HEIGHT,
     // The paddles cannot move horizontally, so there is no point in storing 
     // the position in a 10-bit variable. Instead, just use a parameter.
     parameter X,

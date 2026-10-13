@@ -16,6 +16,12 @@ module tt_um_omrawaley_pong (
     input  wire       rst_n     // reset_n - low to reset
 );
 
+  localparam VGA_H_RES = 640;
+  localparam VGA_V_RES = 480;
+
+  localparam PADDLE_WIDTH = 16;
+  localparam PADDLE_HEIGHT = 48;
+
   reg [1:0] r;
   reg [1:0] g;
   reg [1:0] b;
@@ -26,7 +32,10 @@ module tt_um_omrawaley_pong (
   wire [9:0] v_count;
   wire video_en;
 
-  vga_controller vga_cont (
+  vga_controller #(
+    .H_RES(VGA_H_RES),
+    .V_RES(VGA_V_RES)
+  ) vga_controller_signal (
     .clk(clk),
     .rst_n(rst_n),
     .hsync(hsync),
@@ -36,40 +45,59 @@ module tt_um_omrawaley_pong (
     .video_en(video_en)
   );
 
-  // Quick color test (temporary)
-  // assign r = video_en ? 2'b11 : 2'b00;
-  // assign g = video_en ? 2'b00 : 2'b00;
-  // assign b = video_en ? 2'b01 : 2'b00;
-
   wire [9:0] player_y;
 
   paddle #(
+    .WIDTH(PADDLE_WIDTH),
+    .HEIGHT(PADDLE_HEIGHT),
     .X(16),
     .START_Y(0)
   ) player (
     .clk(clk),
     .move_dir(ui_in[0] ? 1 : -1),
     .y(player_y)
+  )
+  ;
+  paddle #(
+    .WIDTH(PADDLE_WIDTH),
+    .HEIGHT(PADDLE_HEIGHT),
+    .X(16),
+    .START_Y(0)
+  ) ai (
+    .clk(clk),
+    .move_dir(ui_in[1] ? 1 : -1),
+    .y(player_y)
+  );
+
+  renderer #(
+    .PADDLE_WIDTH(PADDLE_WIDTH),
+    .PADDLE_HEIGHT(PADDLE_HEIGHT)
+  ) renderer_rgb (
+    .clk(clk),
+    .video_en(video_en),
+    .r(r),
+    .g(g),
+    .b(b)
   );
 
   // Procedural drawing test (temporary)
-  always @(posedge clk) begin
-    if (video_en) begin
-      if (h_count <= 100) begin
-         r <= 2'b11;
-         g <= 2'b00;
-         b <= 2'b01;
-      end else begin
-         r <= 2'b00;
-         g <= 2'b00;
-         b <= 2'b01;
-      end
-    end else begin
-      r <= 2'b00;
-      g <= 2'b00;
-      b <= 2'b00;
-    end
-  end
+  // always @(posedge clk) begin
+  //   if (video_en) begin
+  //     if (h_count <= 100) begin
+  //       r <= 2'b11;
+  //       g <= 2'b00;
+  //       b <= 2'b01;
+  //     end else begin
+  //       r <= 2'b00;
+  //       g <= 2'b00;
+  //       b <= 2'b01;
+  //     end
+  //   end else begin
+  //     r <= 2'b00;
+  //     g <= 2'b00;
+  //     b <= 2'b00;
+  //   end
+  // end
 
   // Tiny VGA PMOD: https://github.com/mole99/tiny-vga
   assign uo_out = {hsync, b[0], g[0], r[0], vsync, b[1], g[1], r[1]};

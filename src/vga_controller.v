@@ -1,4 +1,15 @@
-module vga_controller (
+module vga_controller # (
+    parameter H_RES = 640;
+    parameter V_RES = 480;
+
+    parameter H_FRONT_PORCH = 16;
+    parameter H_BACK_PORCH = 48;
+    parameter V_FRONT_PORCH = 10;
+    parameter V_BACK_PORCH = 33;
+
+    parameter H_SYNC_PULSE_WIDTH = 96;
+    parameter V_SYNC_PULSE_WIDTH = 2;
+)(
     input wire       clk,
     input wire       rst_n,
     output reg       hsync,
@@ -14,16 +25,16 @@ module vga_controller (
     //
     // This controller uses the 640x480 @ 60 Hz configuration.
 
-    localparam H_RES = 640;
-    localparam V_RES = 480;
+    // localparam H_RES = 640;
+    // localparam V_RES = 480;
 
-    localparam H_FRONT_PORCH = 16;
-    localparam H_BACK_PORCH = 48;
-    localparam V_FRONT_PORCH = 10;
-    localparam V_BACK_PORCH = 33;
+    // localparam H_FRONT_PORCH = 16;
+    // localparam H_BACK_PORCH = 48;
+    // localparam V_FRONT_PORCH = 10;
+    // localparam V_BACK_PORCH = 33;
 
-    localparam H_SYNC_PULSE_WIDTH = 96;
-    localparam V_SYNC_PULSE_WIDTH = 2;
+    // localparam H_SYNC_PULSE_WIDTH = 96;
+    // localparam V_SYNC_PULSE_WIDTH = 2;
 
     localparam H_SYNC_START = H_RES + H_FRONT_PORCH;
     localparam H_SYNC_END = H_SYNC_START + H_SYNC_PULSE_WIDTH - 1;
