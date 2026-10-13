@@ -4,13 +4,15 @@ module renderer #(
     parameter PADDLE_WIDTH = 0,
     parameter PADDLE_HEIGHT = 0
 )(
-    input wire       clk,
-    input wire       video_en,
-    output reg [2:0] r,
-    output reg [2:0] g,
-    output reg [2:0] b,
-    input reg  [9:0] player_y,
-    input reg  [9:0] ai_y
+    input wire        clk,
+    input wire        video_en,
+    input wire  [9:0] h_count,
+    output wire [9:0] v_count,
+    output reg  [1:0] r,
+    output reg  [1:0] g,
+    output reg  [1:0] b,
+    input reg   [9:0] player_y,
+    input reg   [9:0] ai_y
 );
 
     initial begin
