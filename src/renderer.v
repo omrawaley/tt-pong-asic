@@ -9,7 +9,7 @@ module renderer #(
     input wire        clk,
     input wire        video_en,
     input wire  [9:0] h_count,
-    output wire [9:0] v_count,
+    input wire  [9:0] v_count,
     output reg  [1:0] r,
     output reg  [1:0] g,
     output reg  [1:0] b,
@@ -17,15 +17,21 @@ module renderer #(
     input reg   [9:0] ai_y
 );
 
+    reg should_draw;
+
     always @(posedge clk) begin
         if (video_en) begin
             if (h_count <= PLAYER_X + PADDLE_WIDTH) begin
                 if (v_count <= player_y + PADDLE_HEIGHT) begin
-                    r <= 2'b11;
-                    g <= 2'b11;
-                    r <= 2'b11;
+                    should_draw = 1;
                 end
             end
+        end
+
+        if (should_draw) begin
+            r <= 2'b11;
+            g <= 2'b11;
+            r <= 2'b11;
         end else begin
             r <= 2'b00;
             g <= 2'b00;
@@ -37,6 +43,8 @@ module renderer #(
         r = 2'b00;
         g = 2'b00;
         b = 2'b00;
+
+        should_draw = 0;
     end
 
 endmodule
