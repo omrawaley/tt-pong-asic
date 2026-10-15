@@ -55,7 +55,8 @@ module tt_um_omrawaley_pong (
     .WIDTH(PADDLE_WIDTH),
     .HEIGHT(PADDLE_HEIGHT),
     .X(PLAYER_START_X),
-    .START_Y(0)
+    .START_Y(0),
+    .VGA_V_RES(VGA_V_RES)
   ) player (
     .clk(clk),
     .move_dir(ui_in[0] ? 1 : -1),
@@ -66,7 +67,8 @@ module tt_um_omrawaley_pong (
     .WIDTH(PADDLE_WIDTH),
     .HEIGHT(PADDLE_HEIGHT),
     .X(AI_START_X),
-    .START_Y(0)
+    .START_Y(0),
+    .VGA_V_RES(VGA_V_RES)
   ) ai (
     .clk(clk),
     .move_dir(ui_in[1] ? 1 : -1),
