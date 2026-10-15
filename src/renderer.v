@@ -13,19 +13,21 @@ module renderer #(
     output reg  [1:0] r,
     output reg  [1:0] g,
     output reg  [1:0] b,
-    input reg   [9:0] player_y,
-    input reg   [9:0] ai_y
+    input wire  [9:0] player_y,
+    input wire  [9:0] ai_y
 );
 
     reg should_draw;
 
     always @(posedge clk) begin
         if (video_en) begin
-            if (h_count <= PLAYER_X + PADDLE_WIDTH) begin
-                if (v_count <= player_y + PADDLE_HEIGHT) begin
-                    should_draw <= 1;
-                end
+            if ((h_count >= PLAYER_X && h_count < PLAYER_X + PADDLE_WIDTH) && (v_count >= player_y && v_count < player_y + PADDLE_HEIGHT)) begin
+                should_draw <= 1;
+            end else begin
+                should_draw <= 0; // Negative space
             end
+        end else begin
+            should_draw <= 0; // Blanking period
         end
 
         if (should_draw) begin
