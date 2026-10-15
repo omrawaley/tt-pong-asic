@@ -4,7 +4,7 @@ module renderer #(
     parameter PADDLE_WIDTH = 0,
     parameter PADDLE_HEIGHT = 0,
     parameter PLAYER_X = 0,
-    parameter AI_Y = 0
+    parameter AI_X = 0
 )(
     input wire        clk,
     input wire        video_en,

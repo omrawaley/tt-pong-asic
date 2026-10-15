@@ -77,7 +77,9 @@ module tt_um_omrawaley_pong (
 
   renderer #(
     .PADDLE_WIDTH(PADDLE_WIDTH),
-    .PADDLE_HEIGHT(PADDLE_HEIGHT)
+    .PADDLE_HEIGHT(PADDLE_HEIGHT),
+    .PLAYER_X(PLAYER_START_X),
+    .AI_X(AI_START_X)
   ) renderer_rgb (
     .clk(clk),
     .video_en(video_en),
