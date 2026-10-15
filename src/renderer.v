@@ -31,7 +31,7 @@ module renderer #(
         if (should_draw) begin
             r <= 2'b11;
             g <= 2'b11;
-            r <= 2'b11;
+            b <= 2'b11;
         end else begin
             r <= 2'b00;
             g <= 2'b00;
