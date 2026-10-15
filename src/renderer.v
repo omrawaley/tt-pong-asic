@@ -23,7 +23,7 @@ module renderer #(
         if (video_en) begin
             if (h_count <= PLAYER_X + PADDLE_WIDTH) begin
                 if (v_count <= player_y + PADDLE_HEIGHT) begin
-                    should_draw = 1;
+                    should_draw <= 1;
                 end
             end
         end
