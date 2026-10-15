@@ -22,6 +22,9 @@ module tt_um_omrawaley_pong (
   localparam PADDLE_WIDTH = 16;
   localparam PADDLE_HEIGHT = 48;
 
+  localparam PLAYER_START_X = 0;
+  localparam AI_START_X = VGA_H_RES - PADDLE_WIDTH;
+
   reg [1:0] r;
   reg [1:0] g;
   reg [1:0] b;
@@ -51,7 +54,7 @@ module tt_um_omrawaley_pong (
   paddle #(
     .WIDTH(PADDLE_WIDTH),
     .HEIGHT(PADDLE_HEIGHT),
-    .X(0),
+    .X(PLAYER_START_X),
     .START_Y(0)
   ) player (
     .clk(clk),
@@ -62,7 +65,7 @@ module tt_um_omrawaley_pong (
   paddle #(
     .WIDTH(PADDLE_WIDTH),
     .HEIGHT(PADDLE_HEIGHT),
-    .X(VGA_H_RES - PADDLE_WIDTH),
+    .X(AI_START_X),
     .START_Y(0)
   ) ai (
     .clk(clk),
