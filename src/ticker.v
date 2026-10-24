@@ -1,12 +1,12 @@
 module ticker#(
-    parameter COUNT_MAX = 2000000
+    parameter COUNT_MAX = 200000
 ) (
     input wire  clk,
     input wire  rst_n,
     output wire tick
 );
 
-    reg [31:0] count;
+    reg [17:0] count;
 
     assign tick = (count >= COUNT_MAX) ? 1 : 0;
 
