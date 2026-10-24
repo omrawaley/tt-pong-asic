@@ -67,10 +67,11 @@ module tt_um_omrawaley_pong (
     .VGA_V_RES(VGA_V_RES)
   ) player (
     .clk(clk),
+    .tick(tick),
     .move_dir(ui_in[0] ? 1 : -1),
     .y(player_y)
-  )
-  ;
+  );
+
   paddle #(
     .WIDTH(PADDLE_WIDTH),
     .HEIGHT(PADDLE_HEIGHT),
@@ -79,6 +80,7 @@ module tt_um_omrawaley_pong (
     .VGA_V_RES(VGA_V_RES)
   ) ai (
     .clk(clk),
+    .tick(tick),
     .move_dir(ui_in[1] ? 1 : -1),
     .y(ai_y)
   );
