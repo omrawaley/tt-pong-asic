@@ -25,6 +25,14 @@ module tt_um_omrawaley_pong (
   localparam PLAYER_START_X = 0;
   localparam AI_START_X = VGA_H_RES - PADDLE_WIDTH;
 
+  wire tick;
+
+  ticker tick_gen (
+    .clk(clk),
+    .rst_n(rst_n),
+    .tick(tick)
+  );
+
   reg [1:0] r;
   reg [1:0] g;
   reg [1:0] b;

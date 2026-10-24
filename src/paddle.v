@@ -10,15 +10,18 @@ module paddle #(
     parameter VGA_V_RES = 480
 )(
     input wire              clk,
+    input wire              tick,
     input wire signed [1:0] move_dir,
     output reg        [9:0] y
 );
 
     always @(posedge clk) begin
-        if (move_dir > 0 && y > 0) begin
-            y <= y - SPEED;
-        end else if (move_dir < 0 && y + HEIGHT < VGA_V_RES) begin
-            y <= y + SPEED;
+        if (tick) begin
+            if (move_dir > 0 && y > 0) begin
+                y <= y - SPEED;
+            end else if (move_dir < 0 && y + HEIGHT < VGA_V_RES) begin
+                y <= y + SPEED;
+            end
         end
     end
 
