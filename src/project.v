@@ -20,7 +20,7 @@ module tt_um_omrawaley_pong (
   localparam VGA_V_RES = 480;
 
   localparam PADDLE_WIDTH = 16;
-  localparam PADDLE_HEIGHT = 48;
+  localparam PADDLE_HEIGHT = 120;
 
   localparam PLAYER_START_X = 0;
   localparam AI_START_X = VGA_H_RES - PADDLE_WIDTH;
