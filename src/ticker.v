@@ -8,16 +8,15 @@ module ticker#(
 
     reg [31:0] count;
 
+    assign tick = (count >= COUNT_MAX) ? 1 : 0;
+
     always @(posedge clk) begin
         if (~rst_n) begin
             count <= 0;
-            tick <= 0;
         end else if (count >= COUNT_MAX) begin
             count <= 0;
-            tick <= 1; // A tick has passed
         end else begin
             count <= count + 1;
-            tick <= 0;
         end
     end
 
