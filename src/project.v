@@ -22,6 +22,8 @@ module tt_um_omrawaley_pong (
   localparam PADDLE_WIDTH = 16;
   localparam PADDLE_HEIGHT = 120;
 
+  localparam BALL_SIZE = 16;
+
   localparam PLAYER_START_X = 0;
   localparam AI_START_X = VGA_H_RES - PADDLE_WIDTH;
 
@@ -85,9 +87,27 @@ module tt_um_omrawaley_pong (
     .y(ai_y)
   );
 
+  wire [9:0] ball_x;
+  wire [9:0] ball_y;
+  
+  ball #(
+    .SIZE(BALL_SIZE),
+    .START_X(0),
+    .START_Y(0),
+    .PLAYER_X(PLAYER_START_X),
+    .AI_X(AI_START_X),
+    .VGA_V_RES(VGA_V_RES),
+  ) ball1 (
+    .clk(clk),
+    .tick(tick),
+    .x(ball_x),
+    .y(ball_y)
+  );
+
   renderer #(
     .PADDLE_WIDTH(PADDLE_WIDTH),
     .PADDLE_HEIGHT(PADDLE_HEIGHT),
+    .BALL_SIZE(BALL_SIZE),
     .PLAYER_X(PLAYER_START_X),
     .AI_X(AI_START_X)
   ) renderer_rgb (
@@ -95,11 +115,13 @@ module tt_um_omrawaley_pong (
     .video_en(video_en),
     .h_count(h_count),
     .v_count(v_count),
+    .player_y(player_y),
+    .ai_y(ai_y)
+    .ball_x(ball_x),
+    .ball_y(ball_y),
     .r(r),
     .g(g),
     .b(b),
-    .player_y(player_y),
-    .ai_y(ai_y)
   );
 
   // Procedural drawing test (temporary)
