@@ -39,6 +39,12 @@ module ball #(
                     y = y - SPEED;
                 end
             end
+
+            if (y == 0) begin
+                move_down = 1;
+            end else if (y + SIZE == VGA_H_RES) begin
+                move_down = 0;
+            end
         end
     end
 
