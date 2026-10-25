@@ -4,9 +4,10 @@ module ball #(
     parameter START_Y = 0,
     parameter SPEED = 1,
     // Needed to determine the boundaries of where the ball can move.
+    parameter VGA_H_RES = 640;
     parameter VGA_V_RES = 480,
-    parameter PLAYER_X = 0,
-    parameter AI_X = 0
+    // parameter PLAYER_X = 0,
+    // parameter AI_X = 0
 )(
     input wire clk,
     input wire tick,
@@ -20,11 +21,11 @@ module ball #(
     always @(posedge clk) begin
         if (tick) begin
             if (move_right) begin
-                if (x + SIZE < AI_X) begin
+                if (x + SIZE < VGA_H_RES) begin
                     x = x + SPEED;
                 end
             end else begin
-                if (x > PLAYER_X) begin
+                if (x > 0) begin
                     x = x - SPEED;
                 end
             end
