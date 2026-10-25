@@ -4,8 +4,8 @@ module ball #(
     parameter START_Y = 0,
     parameter SPEED = 1,
     // Needed to determine the boundaries of where the ball can move.
-    parameter VGA_H_RES = 640;
-    parameter VGA_V_RES = 480,
+    parameter VGA_H_RES = 640,
+    parameter VGA_V_RES = 480
     // parameter PLAYER_X = 0,
     // parameter AI_X = 0
 )(
