@@ -116,12 +116,12 @@ module tt_um_omrawaley_pong (
     .h_count(h_count),
     .v_count(v_count),
     .player_y(player_y),
-    .ai_y(ai_y)
+    .ai_y(ai_y),
     .ball_x(ball_x),
     .ball_y(ball_y),
     .r(r),
     .g(g),
-    .b(b),
+    .b(b)
   );
 
   // Procedural drawing test (temporary)

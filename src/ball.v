@@ -4,7 +4,7 @@ module ball #(
     parameter START_Y = 0,
     parameter SPEED = 1,
     // Needed to determine the boundaries of where the ball can move.
-    parameter VGA_V_RES = 480
+    parameter VGA_V_RES = 480,
     parameter PLAYER_X = 0,
     parameter AI_X = 0,
 )(
@@ -30,7 +30,7 @@ module ball #(
             end
 
             if (move_down) begin
-                if (y + size < VGA_V_RES) begin
+                if (y + SIZE < VGA_V_RES) begin
                     y = y + SPEED;
                 end
             end else begin

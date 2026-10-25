@@ -12,12 +12,12 @@ module renderer #(
     input wire  [9:0] h_count,
     input wire  [9:0] v_count,
     input wire  [9:0] player_y,
-    input wire  [9:0] ai_y
+    input wire  [9:0] ai_y,
     input wire  [9:0] ball_x,
     input wire  [9:0] ball_y,
     output reg  [1:0] r,
     output reg  [1:0] g,
-    output reg  [1:0] b,
+    output reg  [1:0] b
 );
 
     reg should_draw;
