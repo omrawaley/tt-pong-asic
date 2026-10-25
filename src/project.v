@@ -96,7 +96,7 @@ module tt_um_omrawaley_pong (
     .START_Y(0),
     .PLAYER_X(PLAYER_START_X),
     .AI_X(AI_START_X),
-    .VGA_V_RES(VGA_V_RES),
+    .VGA_V_RES(VGA_V_RES)
   ) ball1 (
     .clk(clk),
     .tick(tick),

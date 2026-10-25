@@ -6,7 +6,7 @@ module ball #(
     // Needed to determine the boundaries of where the ball can move.
     parameter VGA_V_RES = 480,
     parameter PLAYER_X = 0,
-    parameter AI_X = 0,
+    parameter AI_X = 0
 )(
     input wire clk,
     input wire tick,
