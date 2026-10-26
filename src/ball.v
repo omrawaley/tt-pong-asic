@@ -22,28 +22,26 @@ module ball #(
         if (tick) begin
             if (move_right) begin
                 if (x + SIZE < VGA_H_RES) begin
-                    x = x + SPEED;
+                    x <= x + SPEED;
                 end
             end else begin
                 if (x > 0) begin
-                    x = x - SPEED;
+                    x <= x - SPEED;
                 end
             end
 
             if (move_down) begin
                 if (y + SIZE < VGA_V_RES) begin
-                    y = y + SPEED;
+                    y <= y + SPEED;
+                end else if (y + SIZE >= VGA_V_RES) begin
+                    move_down <= 0;
                 end
             end else begin
                 if (y > 0) begin
-                    y = y - SPEED;
+                    y <= y - SPEED;
+                end else if (y <= 0) begin
+                    move_down <= 1;
                 end
-            end
-
-            if (y == 0) begin
-                move_down = 1;
-            end else if (y + SIZE == VGA_H_RES) begin
-                move_down = 0;
             end
         end
     end
