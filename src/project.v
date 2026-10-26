@@ -29,12 +29,6 @@ module tt_um_omrawaley_pong (
 
   wire tick;
 
-  ticker tick_gen (
-    .clk(clk),
-    .rst_n(rst_n),
-    .tick(tick)
-  );
-
   reg [1:0] r;
   reg [1:0] g;
   reg [1:0] b;
@@ -44,6 +38,18 @@ module tt_um_omrawaley_pong (
   wire [9:0] h_count;
   wire [9:0] v_count;
   wire video_en;
+
+  wire [9:0] player_y;
+  wire [9:0] ai_y;
+
+  wire [9:0] ball_x;
+  wire [9:0] ball_y;
+
+  ticker tick_gen (
+    .clk(clk),
+    .rst_n(rst_n),
+    .tick(tick)
+  );
 
   vga_controller #(
     .H_RES(VGA_H_RES),
@@ -57,9 +63,6 @@ module tt_um_omrawaley_pong (
     .v_count(v_count),
     .video_en(video_en)
   );
-
-  wire [9:0] player_y;
-  wire [9:0] ai_y;
 
   paddle #(
     .WIDTH(PADDLE_WIDTH),
@@ -83,13 +86,10 @@ module tt_um_omrawaley_pong (
   ) ai (
     .clk(clk),
     .tick(tick),
-    .move_dir(ui_in[1] ? 1 : -1),
+    .move_dir(ball_y > ai_y ? 1 : -1),
     .y(ai_y)
   );
 
-  wire [9:0] ball_x;
-  wire [9:0] ball_y;
-  
   ball #(
     .SIZE(BALL_SIZE),
     .START_X(0),
