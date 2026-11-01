@@ -86,7 +86,7 @@ module tt_um_omrawaley_pong (
   ) ai (
     .clk(clk),
     .tick(tick),
-    .move_dir(ball_y > ai_y ? 1 : -1),
+    .move_dir((ball_y + BALL_SIZE) >> 2 > (ai_y + PADDLE_HEIGHT) >> 2 ? -1 : 1),
     .y(ai_y)
   );
 
