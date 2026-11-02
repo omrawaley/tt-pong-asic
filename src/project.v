@@ -95,7 +95,7 @@ module tt_um_omrawaley_pong (
     .START_X(0),
     .START_Y(0),
     .VGA_H_RES(VGA_H_RES),
-    .VGA_V_RES(VGA_V_RES)
+    .VGA_V_RES(VGA_V_RES),
     .PLAYER_X(PLAYER_START_X),
     .AI_X(AI_START_X),
     .PADDLE_WIDTH(PADDLE_WIDTH),
@@ -106,7 +106,7 @@ module tt_um_omrawaley_pong (
     .player_y(player_y),
     .ai_y(ai_y),
     .x(ball_x),
-    .y(ball_y),
+    .y(ball_y)
   );
 
   renderer #(
