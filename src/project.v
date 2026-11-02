@@ -125,25 +125,6 @@ module tt_um_omrawaley_pong (
     .b(b)
   );
 
-  // Procedural drawing test (temporary)
-  // always @(posedge clk) begin
-  //   if (video_en) begin
-  //     if (h_count <= 100) begin
-  //       r <= 2'b11;
-  //       g <= 2'b00;
-  //       b <= 2'b01;
-  //     end else begin
-  //       r <= 2'b00;
-  //       g <= 2'b00;
-  //       b <= 2'b01;
-  //     end
-  //   end else begin
-  //     r <= 2'b00;
-  //     g <= 2'b00;
-  //     b <= 2'b00;
-  //   end
-  // end
-
   // Tiny VGA PMOD: https://github.com/mole99/tiny-vga
   assign uo_out = {hsync, b[0], g[0], r[0], vsync, b[1], g[1], r[1]};
 
