@@ -6,11 +6,15 @@ module ball #(
     // Needed to determine the boundaries of where the ball can move.
     parameter VGA_H_RES = 640,
     parameter VGA_V_RES = 480
-    // parameter PLAYER_X = 0,
-    // parameter AI_X = 0
+    parameter PLAYER_X = 0,
+    parameter AI_X = 0,
+    parameter PADDLE_WIDTH = 0,
+    parameter PADDLE_HEIGHT = 0
 )(
-    input wire clk,
-    input wire tick,
+    input wire       clk,
+    input wire       tick,
+    input wire [9:0] player_y,
+    input wire [9:0] ai_y,
     output reg [9:0] x,
     output reg [9:0] y
 );
@@ -42,6 +46,10 @@ module ball #(
                 end else if (y <= 0) begin
                     move_down <= 1;
                 end
+            end
+
+            if (x + SIZE >= AI_X && x <= AI_X + PADDLE_WIDTH && y + SIZE >= ai_y && y <= ai_y + PADDLE_HEIGHT) begin
+                move_right = 0;
             end
         end
     end
