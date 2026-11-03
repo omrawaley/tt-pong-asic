@@ -92,8 +92,8 @@ module tt_um_omrawaley_pong (
 
   ball #(
     .SIZE(BALL_SIZE),
-    .START_X(0),
-    .START_Y(0),
+    .START_X((VGA_H_RES >> 2) - (BALL_SIZE >> 2)),
+    .START_Y((VGA_V_RES >> 2) - (BALL_SIZE >> 2)),
     .VGA_H_RES(VGA_H_RES),
     .VGA_V_RES(VGA_V_RES),
     .PLAYER_X(PLAYER_START_X),

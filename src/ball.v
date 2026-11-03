@@ -53,7 +53,7 @@ module ball #(
             end
 
             if (x + SIZE >= PLAYER_X && x <= PLAYER_X + PADDLE_WIDTH && y + SIZE >= player_y && y <= player_y + PADDLE_HEIGHT) begin
-                move_right = 0;
+                move_right = 1;
             end
         end
     end
