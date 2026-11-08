@@ -139,6 +139,8 @@ module tt_um_omrawaley_pong (
     .b(b)
   );
 
+  rst_n = ((player_score == 3) || (ai_score == 3)) ? 0 : rst_n;
+
   // Tiny VGA PMOD: https://github.com/mole99/tiny-vga
   assign uo_out = {hsync, b[0], g[0], r[0], vsync, b[1], g[1], r[1]};
 
