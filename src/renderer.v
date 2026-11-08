@@ -6,7 +6,7 @@ module renderer #(
     parameter BALL_SIZE = 0,
     parameter LINE_WIDTH = 4,
     parameter PLAYER_X = 0,
-    parameter AI_X = 0,
+    parameter AI_X = 0
 )(
     input wire        clk,
     input wire        video_en,
