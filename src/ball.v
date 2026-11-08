@@ -15,10 +15,10 @@ module ball #(
     input wire       tick,
     input wire [9:0] player_y,
     input wire [9:0] ai_y,
-    input wire [2:0] player_score,
-    input wire [2:0] ai_score,
     output reg [9:0] x,
-    output reg [9:0] y
+    output reg [9:0] y,
+    output reg [2:0] player_score,
+    output reg [2:0] ai_score
 );
 
     reg move_right;

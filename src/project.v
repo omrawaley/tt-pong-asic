@@ -47,8 +47,8 @@ module tt_um_omrawaley_pong (
   wire [9:0] ball_x;
   wire [9:0] ball_y;
 
-  reg [2:0] player_score;
-  reg [2:0] ai_score;
+  wire [2:0] player_score;
+  wire [2:0] ai_score;
 
   ticker tick_gen (
     .clk(clk),
@@ -111,7 +111,9 @@ module tt_um_omrawaley_pong (
     .player_y(player_y),
     .ai_y(ai_y),
     .x(ball_x),
-    .y(ball_y)
+    .y(ball_y),
+    .player_score(player_score),
+    .ai_score(ai_score)
   );
 
   renderer #(
@@ -130,6 +132,8 @@ module tt_um_omrawaley_pong (
     .ai_y(ai_y),
     .ball_x(ball_x),
     .ball_y(ball_y),
+    .player_score(player_score),
+    .ai_score(ai_score),
     .r(r),
     .g(g),
     .b(b)
