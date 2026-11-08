@@ -16,6 +16,8 @@ module renderer #(
     input wire  [9:0] ai_y,
     input wire  [9:0] ball_x,
     input wire  [9:0] ball_y,
+    input wire  [2:0] player_score,
+    input wire  [2:0] ai_score,
     output reg  [1:0] r,
     output reg  [1:0] g,
     output reg  [1:0] b
@@ -25,6 +27,16 @@ module renderer #(
     wire is_ai = ((h_count >= AI_X && h_count < AI_X + PADDLE_WIDTH) && (v_count >= ai_y && v_count < ai_y + PADDLE_HEIGHT));
     wire is_ball = ((h_count >= ball_x && h_count < ball_x + BALL_SIZE) && (v_count >= ball_y && v_count < ball_y + BALL_SIZE));
     wire is_line = (h_count >= ((VGA_H_RES >> 1) - (LINE_WIDTH / 2))) && (h_count < ((VGA_H_RES >> 1) + (LINE_WIDTH - (LINE_WIDTH / 2)))) && v_count[4];
+    wire is_player_score = (v_count >= 24 && v_count < 40) && (
+        (player_score > 0 && h_count >= 280 && h_count < 292) ||
+        (player_score > 1 && h_count >= 256 && h_count < 268) ||
+        (player_score > 2 && h_count >= 232 && h_count < 244)
+    );
+    wire is_ai_score = (v_count >= 24 && v_count < 40) && (
+        (ai_score > 0 && h_count >= 348 && h_count < 360) ||
+        (ai_score > 1 && h_count >= 372 && h_count < 384) ||
+        (ai_score > 2 && h_count >= 396 && h_count < 408)
+    );
 
     always @(posedge clk) begin
         if (!video_en) begin
@@ -39,6 +51,8 @@ module renderer #(
                 r <= 2'b00; g <= 2'b11; b <= 2'b00; // Player
             end else if (is_ai) begin
                 r <= 2'b00; g <= 2'b11; b <= 2'b00; // AI
+            end else if (is_player_score || is_ai_score) begin
+                r <= 2'b11; g <= 2'b11; b <= 2'b11; // Scores (dots)
             end else if (is_line) begin
                 r <= 2'b10; g <= 2'b10; b <= 2'b10; // Dotted line
             end else begin

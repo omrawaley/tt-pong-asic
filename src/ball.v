@@ -15,6 +15,8 @@ module ball #(
     input wire       tick,
     input wire [9:0] player_y,
     input wire [9:0] ai_y,
+    input wire [2:0] player_score,
+    input wire [2:0] ai_score,
     output reg [9:0] x,
     output reg [9:0] y
 );
@@ -49,11 +51,19 @@ module ball #(
             end
 
             if (x + SIZE >= AI_X && x <= AI_X + PADDLE_WIDTH && y + SIZE >= ai_y && y <= ai_y + PADDLE_HEIGHT) begin
-                move_right = 0;
+                move_right <= 0;
             end
 
             if (x + SIZE >= PLAYER_X && x <= PLAYER_X + PADDLE_WIDTH && y + SIZE >= player_y && y <= player_y + PADDLE_HEIGHT) begin
-                move_right = 1;
+                move_right <= 1;
+            end
+
+            if (x <= 0) begin
+                ai_score <= ai_score + 1;
+            end
+
+            if (x + SIZE >= VGA_H_RES) begin
+                player_score <= player_score + 1;
             end
         end
     end

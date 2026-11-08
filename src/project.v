@@ -47,6 +47,9 @@ module tt_um_omrawaley_pong (
   wire [9:0] ball_x;
   wire [9:0] ball_y;
 
+  reg [2:0] player_score;
+  reg [2:0] ai_score;
+
   ticker tick_gen (
     .clk(clk),
     .rst_n(rst_n),
