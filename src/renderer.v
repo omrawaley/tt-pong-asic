@@ -52,7 +52,11 @@ module renderer #(
             end else if (is_ai) begin
                 r <= 2'b00; g <= 2'b11; b <= 2'b00; // AI
             end else if (is_player_score || is_ai_score) begin
-                r <= 2'b11; g <= 2'b11; b <= 2'b11; // Scores (dots)
+                if ((player_score >= 3) || (ai_score >= 3)) begin // Scores (dots)
+                    r <= 2'b11; g <= 2'b00; b <= 2'b00;
+                end else begin
+                    r <= 2'b11; g <= 2'b11; b <= 2'b11;
+                end
             end else if (is_line) begin
                 r <= 2'b10; g <= 2'b10; b <= 2'b10; // Dotted line
             end else begin
