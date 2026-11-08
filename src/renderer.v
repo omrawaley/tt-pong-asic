@@ -20,27 +20,29 @@ module renderer #(
     output reg  [1:0] b
 );
 
-    reg should_draw;
+    wire is_player = ((h_count >= PLAYER_X && h_count < PLAYER_X + PADDLE_WIDTH) && (v_count >= player_y && v_count < player_y + PADDLE_HEIGHT));
+    wire is_ai = ((h_count >= AI_X && h_count < AI_X + PADDLE_WIDTH) && (v_count >= ai_y && v_count < ai_y + PADDLE_HEIGHT));
+    wire is_ball = ((h_count >= ball_x && h_count < ball_x + BALL_SIZE) && (v_count >= ball_y && v_count < ball_y + BALL_SIZE));
+    wire is_line = ((h_count == (VGA_H_RES >> 1)) && v_count[4]);
 
     always @(posedge clk) begin
-        if (video_en) begin
-            if (((h_count >= PLAYER_X && h_count < PLAYER_X + PADDLE_WIDTH) && (v_count >= player_y && v_count < player_y + PADDLE_HEIGHT)) || ((h_count >= AI_X && h_count < AI_X + PADDLE_WIDTH) && (v_count >= ai_y && v_count < ai_y + PADDLE_HEIGHT)) || ((h_count >= ball_x && h_count < ball_x + BALL_SIZE) && (v_count >= ball_y && v_count < ball_y + BALL_SIZE)) || ((h_count == (VGA_H_RES >> 1)) && v_count[4])) begin
-                should_draw <= 1;
-            end else begin
-                should_draw <= 0; // Negative space
-            end
-        end else begin
-            should_draw <= 0; // Blanking period
-        end
-
-        if (should_draw) begin
-            r <= 2'b11;
-            g <= 2'b11;
-            b <= 2'b11;
-        end else begin
+        if (!video_en) begin
+            // Blanking period
             r <= 2'b00;
             g <= 2'b00;
             b <= 2'b00;
+        end else begin
+            if (is_ball) begin
+                r <= 2'b11; g <= 2'b11; b <= 2'b00; // Ball
+            end else if (is_player) begin
+                r <= 2'b00; g <= 2'b11; b <= 2'b00; // Player
+            end else if (is_ai) begin
+                r <= 2'b00; g <= 2'b11; b <= 2'b00; // AI
+            end else if (is_net) begin
+                r <= 2'b10; g <= 2'b10; b <= 2'b10; // Dotted line
+            end else begin
+                r <= 2'b00; g <= 2'b00; b <= 2'b00; // Background
+            end
         end
     end
 
@@ -49,7 +51,7 @@ module renderer #(
         g = 2'b00;
         b = 2'b00;
 
-        should_draw = 0;
+        // should_draw = 0;
     end
 
 endmodule
