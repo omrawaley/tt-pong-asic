@@ -60,10 +60,14 @@ module ball #(
 
             if (x <= 0) begin
                 ai_score <= ai_score + 1;
+                x <= START_X;
+                move_right = 1;
             end
 
             if (x + SIZE >= VGA_H_RES) begin
                 player_score <= player_score + 1;
+                y <= START_Y;
+                move_right = 0;
             end
         end
     end
