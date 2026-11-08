@@ -4,8 +4,9 @@ module renderer #(
     parameter PADDLE_WIDTH = 0,
     parameter PADDLE_HEIGHT = 0,
     parameter BALL_SIZE = 0,
+    parameter LINE_WIDTH = 4,
     parameter PLAYER_X = 0,
-    parameter AI_X = 0
+    parameter AI_X = 0,
 )(
     input wire        clk,
     input wire        video_en,
@@ -23,7 +24,7 @@ module renderer #(
     wire is_player = ((h_count >= PLAYER_X && h_count < PLAYER_X + PADDLE_WIDTH) && (v_count >= player_y && v_count < player_y + PADDLE_HEIGHT));
     wire is_ai = ((h_count >= AI_X && h_count < AI_X + PADDLE_WIDTH) && (v_count >= ai_y && v_count < ai_y + PADDLE_HEIGHT));
     wire is_ball = ((h_count >= ball_x && h_count < ball_x + BALL_SIZE) && (v_count >= ball_y && v_count < ball_y + BALL_SIZE));
-    wire is_line = ((h_count == (VGA_H_RES >> 1)) && v_count[4]);
+    wire is_line = (h_count >= ((VGA_H_RES >> 1) - (LINE_WIDTH / 2))) && (h_count < ((VGA_H_RES >> 1) + (LINE_WIDTH - (LINE_WIDTH / 2)))) && v_count[4];
 
     always @(posedge clk) begin
         if (!video_en) begin
@@ -38,7 +39,7 @@ module renderer #(
                 r <= 2'b00; g <= 2'b11; b <= 2'b00; // Player
             end else if (is_ai) begin
                 r <= 2'b00; g <= 2'b11; b <= 2'b00; // AI
-            end else if (is_net) begin
+            end else if (is_line) begin
                 r <= 2'b10; g <= 2'b10; b <= 2'b10; // Dotted line
             end else begin
                 r <= 2'b00; g <= 2'b00; b <= 2'b00; // Background

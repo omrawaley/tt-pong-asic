@@ -24,6 +24,8 @@ module tt_um_omrawaley_pong (
 
   localparam BALL_SIZE = 16;
 
+  localparam LINE_WIDTH = 4;
+
   localparam PLAYER_START_X = 0;
   localparam AI_START_X = VGA_H_RES - PADDLE_WIDTH;
 
@@ -113,6 +115,7 @@ module tt_um_omrawaley_pong (
     .PADDLE_WIDTH(PADDLE_WIDTH),
     .PADDLE_HEIGHT(PADDLE_HEIGHT),
     .BALL_SIZE(BALL_SIZE),
+    .LINE_WIDTH(LINE_WIDTH),
     .PLAYER_X(PLAYER_START_X),
     .AI_X(AI_START_X)
   ) renderer_rgb (
